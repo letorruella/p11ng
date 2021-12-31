@@ -1,0 +1,96 @@
+{% extends "layouts/base-admin.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row mt-5">
+  <div class="col-12">
+    <div class="card card-chart p-2">
+      <div class="row">
+        <div class="col-sm-6 text-left">
+          <h2 class="card-title text-white">Revenue</h2>
+          <h5 class="card-title ">Your monthly total after expenses</h>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="CountryChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+  console.log(demo)
+
+  var data = {
+    labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+    datasets: [{
+      label: "Data",
+      fill: true,
+      // backgroundColor: gradientStroke,
+      borderColor: '#d048b6',
+      borderWidth: 2,
+      borderDash: [],
+      borderDashOffset: 0.0,
+      pointBackgroundColor: '#d048b6',
+      pointBorderColor: 'rgba(255,255,255,0)',
+      pointHoverBackgroundColor: '#d048b6',
+      pointBorderWidth: 20,
+      pointHoverRadius: 4,
+      pointHoverBorderWidth: 15,
+      pointRadius: 4,
+      data: [80, 100, 70, 80, 120, 80],
+    }]
+  };
+
+  var ctx = document.getElementById("CountryChart").getContext("2d");
+
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    responsive: true,
+    legend: {
+      display: false
+    },
+    data: {
+      labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
+      datasets: [{
+        label: "Countries",
+        fill: true,
+        //backgroundColor: gradientStroke,
+        //hoverBackgroundColor: gradientStroke,
+        borderColor: '#1f8ef1',
+        borderWidth: 2,
+        borderDash: [],
+        borderDashOffset: 0.0,
+        data: [53, 20, 10, 80, 100, 45],
+      }]
+    },
+    options: {
+      
+    }
+  });
+
+
+
+
+  $(document).ready(function () {
+    // Javascript method's body can be found in assets/js/demos.js
+    // demo.initDashboardPageCharts();
+
+
+  });
+</script>
+
+{% endblock javascripts %}
