@@ -13,3 +13,9 @@ class Car(models.Model):
     car_brand = models.CharField(max_length=150, help_text='Car Brand')
     car_model = models.CharField(max_length=150, help_text='Car Model')
     investor = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Event(models.Model):
+    revenue = models.IntegerField(blank=True, null=True)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    date = models.DateField()

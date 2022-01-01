@@ -5,17 +5,23 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django import template
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.db.models import fields
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.urls import reverse
+from .models import Event, Car
+from django.core import serializers
 
 
 @login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
+    # print(cars)
+    # content = {cars:cars}
 
     html_template = loader.get_template('home/index.html')
-    return HttpResponse(html_template.render(context, request))
+    return HttpResponse(html_template.render(context,request))
+
 
 
 @login_required(login_url="/login/")
