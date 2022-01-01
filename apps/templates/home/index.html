@@ -7,11 +7,11 @@
 
 {% block content %}
 
-<div class="row mt-5 ">
+<div class="row mt-2 ">
   <div class="col-lg-8 m-auto">
-    <div class="card card-chart p-2 m-3" style="overflow: scroll;">
+    <div class="card card-chart p-2 m-3" style=" max-width:90vw;">
       <div class="row m-ato">
-        <div class="col-sm-8 text-left">
+        <div class="col-sm-4 text-left">
           <h2 class="card-title text-white">Revenue</h2>
           <h5 class="card-title ">Your monthly total after expenses</h>
         </div>
@@ -288,7 +288,7 @@
       datasets: [{
         label: "earnings",
         fill: true,
-        backgroundColor: '#9C3555',
+        backgroundColor: '#9D4763',
         //hoverBackgroundColor: gradientStroke,
         // borderColor: '#1f8ef1',
         borderWidth: 2,
@@ -299,9 +299,11 @@
     },
     options: {
       scales:{
-        y:{
-          display:false
-        }
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
       }
     }
   });
