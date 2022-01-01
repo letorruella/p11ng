@@ -7,7 +7,6 @@ import os
 from decouple import config
 from unipath import Path
 import django_heroku
-import dj_database_url
 from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -74,19 +73,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'db.sqlite3',
     }
-}
-'''
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
 }
 
 # Password validation
@@ -145,3 +137,4 @@ REST_FRAMEWORK = {
 
 #############################################################
 #############################################################
+django_heroku.settings(locals())
