@@ -15,9 +15,12 @@ from django.core import serializers
 
 @login_required(login_url="/login/")
 def index(request):
-    context = {'segment': 'index'}
+    event = Event.objects.all()
+    context = {'segment': 'index', 'events':event}
     # print(cars)
     # content = {cars:cars}
+    for cont in context['events']:
+        print(cont.car.car_brand)
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context,request))

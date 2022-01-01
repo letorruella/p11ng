@@ -16,6 +16,13 @@ class Car(models.Model):
 
 
 class Event(models.Model):
+    EVENT_TYPE = [
+    ('MAIN', 'Maintenance'),
+    ('ACC', 'Accident'),
+    ('REV', 'Revenue'),
+    ]
+
     revenue = models.IntegerField(blank=True, null=True)
+    event_type = models.CharField(max_length=150, choices=EVENT_TYPE, help_text='Event Type', null=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateField() 
