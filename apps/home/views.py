@@ -9,7 +9,7 @@ from django.db.models import fields
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .models import Event, Car
+from .models import  Car
 from django.core import serializers
 from django.shortcuts import redirect
 

@@ -14,15 +14,24 @@ class Car(models.Model):
     car_model = models.CharField(max_length=150, help_text='Car Model')
     investor = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.car_brand} - {self.car_model} {self.investor.username}'
 
-class Event(models.Model):
-    EVENT_TYPE = [
-    ('maintenance', 'Maintenance'),
-    ('accident', 'Accident'),
-    ('revenue', 'Revenue'),
-    ]
 
+
+class Revenue(models.Model):
     revenue = models.IntegerField(blank=True, null=True)
-    event_type = models.CharField(max_length=150, choices=EVENT_TYPE, help_text='Event Type', null=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    date = models.DateField() 
+    date = models.DateField()
+
+class Accident(models.Model):
+    FAULT=[
+        ('me',"me"),
+        ("thirdparty", "thirdparty")
+    ]
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    accident = models.CharField(help_text="Where accident occur?",max_length=150 ,blank=True, null=True)
+    fault = models.CharField(help_text="Who's at fault?", max_length=150, choices=FAULT, blank=True, null=True)
+    totaled = models.CharField(help_text="Was car totaled?", max_length=150,blank=True, null=True)
+    photo = models.ImageField(upload_to='cars', help_text='Upload all images and documents related to accident',blank=True, null=True)
+    date = models.DateField()
