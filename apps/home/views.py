@@ -11,6 +11,7 @@ from django.template import loader
 from django.urls import reverse
 from .models import Event, Car
 from django.core import serializers
+from django.shortcuts import redirect
 
 
 @login_required(login_url="/login/")
@@ -19,8 +20,9 @@ def index(request):
     context = {'segment': 'index', 'events':event}
     # print(cars)
     # content = {cars:cars}
-    for cont in context['events']:
-        print(cont.car.car_brand)
+    
+    if request.user.is_superuser:
+       return redirect('/admin')
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context,request))

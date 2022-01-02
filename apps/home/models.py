@@ -17,9 +17,9 @@ class Car(models.Model):
 
 class Event(models.Model):
     EVENT_TYPE = [
-    ('MAIN', 'Maintenance'),
-    ('ACC', 'Accident'),
-    ('REV', 'Revenue'),
+    ('maintenance', 'Maintenance'),
+    ('accident', 'Accident'),
+    ('revenue', 'Revenue'),
     ]
 
     revenue = models.IntegerField(blank=True, null=True)
