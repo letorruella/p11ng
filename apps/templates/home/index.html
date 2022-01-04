@@ -35,7 +35,7 @@
     <div class="card card-tasks">
       <div class="card-header ">
         <h6 class="title d-inline">Tasks(5)</h6>
-        <p class="card-category d-inline">today</p> 
+        <p class="card-category d-inline">today</p>
         <div class="dropdown">
           <!--button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
             <i class="tim-icons icon-settings-gear-63"></i>
@@ -47,15 +47,15 @@
           </div-->
         </div>
       </div>
-      
+
       <div class="card-body ">
         <div class="table-full-width table-responsive">
           <table class="table">
             <tbody>
               {% for event in events%}
-                {% if event.event_type == "ACC" %}
-                  {{event.date}}
-                {%endif%}
+              {% if event.event_type == "ACC" %}
+              {{event.date}}
+              {%endif%}
               {% endfor %}
               <tr>
                 <td>
@@ -91,7 +91,8 @@
                 </td>
                 <td>
                   <p class="title">GDPR Compliance</p>
-                  <p class="text-muted">The GDPR is a regulation that requires businesses to protect the personal data and privacy of Europe citizens for transactions that occur within EU member states.</p>
+                  <p class="text-muted">The GDPR is a regulation that requires businesses to protect the personal data
+                    and privacy of Europe citizens for transactions that occur within EU member states.</p>
                 </td>
                 <td class="td-actions text-right">
                   <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
@@ -112,15 +113,18 @@
                 </td>
                 <td>
                   <p class="title">Solve the issues</p>
-                  <p class="text-muted">Fifty percent of all respondents said they would be more likely to shop at a company </p>
+                  <p class="text-muted">Fifty percent of all respondents said they would be more likely to shop at a
+                    company </p>
                 </td>
                 <td class="td-actions text-right">
                   <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
                     <i class="tim-icons icon-pencil"></i>
                   </button>
+                  <button class="btn btn-primary btn-fill" onclick="demo.showSwal('warning-message-and-cancel')">Try
+                    me!</button>
                 </td>
               </tr>
-              
+
             </tbody>
           </table>
         </div>
@@ -150,7 +154,7 @@
                   Event
                 </th>
                 <th>
-                 Date
+                  Date
                 </th>
               </tr>
             </thead>
@@ -160,7 +164,7 @@
                 <td>{{event.event_type}}</td>
                 <td>{{event.car.car_brand}}</td>
                 <td>{{event.date}}</td>
-              </tr>          
+              </tr>
               {% endfor %}
             </tbody>
           </table>
@@ -178,60 +182,67 @@
 {% block javascripts %}
 
 <script>
-    $.ajax(
-    {
-    method: "GET",
-    url: 'http://localhost:8000/home/resources',
-    success: function (data) {
-      console.log(data)
-    },
-    error: function(error_data){
-        console.log("error")
-        console.log(error_data)
-    }
-  }
-  )
 
-  var data = {
-    labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-    datasets: [{
-      label: "Data",
-      fill: true,
-      // backgroundColor: gradientStroke,
-      borderColor: '#d048b6',
-      borderWidth: 2,
-      borderDash: [],
-      borderDashOffset: 0.0,
-      pointBackgroundColor: '#d048b6',
-      pointBorderColor: 'rgba(255,255,255,0)',
-      pointHoverBackgroundColor: '#d048b6',
-      pointBorderWidth: 20,
-      pointHoverRadius: 4,
-      pointHoverBorderWidth: 15,
-      pointRadius: 4,
-      data: [80, 100, 70, 80, 120, 80],
-    }]
-  };
-
-  var ctx = document.getElementById("CountryChart").getContext("2d");
-
-  data = {
-    labels:['May', 'Jun', 'Jul', 'Aug','Sep' ],
-    points:[500, 600,800,600,700]
+  function getData(){
+    return new Promise((resolve,rej ) => {
+      $.ajax(
+    
+      {
+        method: "GET",
+        url: '/api/revenue',
+        success: function (res) {
+          return resolve(res)
+        },
+        error: function (error_data) {
+          console.log("error")
+          console.log(error_data)
+        }
+      }
+    )
+    })
   }
 
+  async function loadDash(){
+      let dataPoints = await getData()
+      var ctx = document.getElementById("CountryChart").getContext("2d");
 
-  var myChart = new Chart(ctx, {
+
+      const data = {
+        labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+        datasets: {
+          label: "Data",
+          fill: true,
+          // backgroundColor: gradientStroke,
+          borderColor: '#d048b6',
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: '#d048b6',
+          pointBorderColor: 'rgba(255,255,255,0)',
+          pointHoverBackgroundColor: '#d048b6',
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [],
+        }
+      }
+
+      for(d of dataPoints){
+        data.datasets.data.push(d.revenue)
+      }
+
+      var myChart = new Chart(ctx, {
     type: 'bar',
     responsive: true,
-    
+
     options: {
-         legend: {
-            display: false
-         },
-         tooltips: {
-            enabled: false
-         }
+      legend: {
+        display: false
+      },
+      tooltips: {
+        enabled: false
+      }
     },
     data: {
       labels: data.labels,
@@ -244,28 +255,105 @@
         borderWidth: 2,
         borderDash: [],
         borderDashOffset: 0.0,
-        data: data.points,
+        data: data.datasets.data,
       }]
     },
     options: {
-      scales:{
-        
+      scales: {
+
         yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+      console.log(dataPoints, data)
+  } 
+
+  /*
+
+  loadDash()
+    const data = {
+        labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+        datasets: {
+          label: "Data",
+          fill: true,
+          // backgroundColor: gradientStroke,
+          borderColor: '#d048b6',
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: '#d048b6',
+          pointBorderColor: 'rgba(255,255,255,0)',
+          pointHoverBackgroundColor: '#d048b6',
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [],
+        }
+      };
+
+
+  
+    
+  
+    if (data.datasets.data.length > 1){
+      console.log("hi")
+    }
+  
+  
+
+
+
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    responsive: true,
+
+    options: {
+      legend: {
+        display: false
+      },
+      tooltips: {
+        enabled: false
+      }
+    },
+    data: {
+      labels: data.labels,
+      datasets: [{
+        label: "earnings",
+        fill: true,
+        backgroundColor: '#9D4763',
+        //hoverBackgroundColor: gradientStroke,
+        // borderColor: '#1f8ef1',
+        borderWidth: 2,
+        borderDash: [],
+        borderDashOffset: 0.0,
+        data: data.datasets.data,
+      }]
+    },
+    options: {
+      scales: {
+
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
         }]
       }
     }
   });
 
-
+*/
 
 
   $(document).ready(function () {
     // Javascript method's body can be found in assets/js/demos.js
     // demo.initDashboardPageCharts();
-
+    loadDash()
 
   });
 </script>
