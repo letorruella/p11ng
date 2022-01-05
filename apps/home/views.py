@@ -9,7 +9,7 @@ from django.db.models import fields
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .models import  Car, Accident, Maintenance
+from .models import  Accident, Maintenance, Revenue
 from django.core import serializers
 from django.shortcuts import redirect
 
@@ -21,6 +21,8 @@ def index(request):
         events.append(accident)
     for maintenace in Maintenance.objects.all():
         events.append(maintenace)
+    for revenue in Revenue.objects.all():
+        events.append(revenue)
     context = {'segment': 'index', 'events':events}
     # print(cars)
     # content = {cars:cars}
