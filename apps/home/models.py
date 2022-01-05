@@ -23,6 +23,9 @@ class Revenue(models.Model):
     revenue = models.IntegerField(blank=True, null=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     date = models.DateField()
+    event_type = models.CharField( default='revenue' ,max_length=150 ,blank=True, null=True)
+
+    
 
 class Accident(models.Model):
     FAULT=[
@@ -35,3 +38,17 @@ class Accident(models.Model):
     totaled = models.CharField(help_text="Was car totaled?", max_length=150,blank=True, null=True)
     photo = models.ImageField(upload_to='cars', help_text='Upload all images and documents related to accident',blank=True, null=True)
     date = models.DateField()
+    event_type = models.CharField( default='accident' ,max_length=150 ,blank=True, null=True)
+    
+    
+
+class Maintenance(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    type = models.CharField(help_text="what type of maintance?", max_length=150, blank=True, null=True)
+    photo = models.ImageField(upload_to='cars', help_text='Upload all images and documents related to accident',blank=True, null=True)
+    value = models.IntegerField(help_text="How much?",blank=True, null=True)
+    cost = models.IntegerField(help_text="Cost?",blank=True, null=True)
+    approve = models.BooleanField(help_text="Approved?", blank=True, null=True )
+    event_type = models.CharField( default='maintenance' ,max_length=150 ,blank=True, null=True)
+
+    

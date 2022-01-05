@@ -4,7 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from django.contrib import admin
-from .models import Car, Revenue, Accident
+from .models import Car, Revenue, Accident, Maintenance
 # Register your models here.
 
 class CarAdmin(admin.ModelAdmin):
@@ -16,6 +16,10 @@ class EventAdmin(admin.ModelAdmin):
 class AccidentAdmin(admin.ModelAdmin):
     pass
 
+class MaintenanceAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(Car, CarAdmin)
 admin.site.register(Revenue, EventAdmin)
 admin.site.register(Accident, AccidentAdmin)
+admin.site.register(Maintenance, MaintenanceAdmin)

@@ -9,14 +9,18 @@ from django.db.models import fields
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .models import  Car, Accident
+from .models import  Car, Accident, Maintenance
 from django.core import serializers
 from django.shortcuts import redirect
 
 
 @login_required(login_url="/login/")
 def index(request):
-    events = Accident.objects.all()
+    events = [] # Maintenance.objects.all() + Accident.objects.all()
+    for accident in Accident.objects.all():
+        events.append(accident)
+    for maintenace in Maintenance.objects.all():
+        events.append(maintenace)
     context = {'segment': 'index', 'events':events}
     # print(cars)
     # content = {cars:cars}
