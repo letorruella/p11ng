@@ -48,9 +48,9 @@
 
     <div class="main-panel">
 
-      {% include 'includes/navigation.html' %}
+ 
 
-      <div class="content">
+      <div class="">
 
         {% block content %}{% endblock content %}
 
@@ -62,11 +62,10 @@
     
   </div>
 
-  {% include 'includes/fixed-plugin.html' %}
+
 
   {% include 'includes/scripts.html' %}
 
-  {% include 'includes/scripts-sidebar.html' %}
 
   <!-- Specific Page JS goes HERE  -->
   {% block javascripts %}{% endblock javascripts %}
