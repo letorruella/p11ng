@@ -1,12 +1,11 @@
 /*!
 
 =========================================================
-* Black Dashboard React v1.2.0
+* Black Dashboard PRO React - v1.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
+* Product Page: https://www.creative-tim.com/product/black-dashboard-pro-react
 * Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
 
 * Coded by Creative Tim
 
@@ -35,17 +34,15 @@ import {
   Nav,
   Container,
   Modal,
-  ModalHeader,
-  NavbarToggler,
+  UncontrolledTooltip,
 } from "reactstrap";
 
-function AdminNavbar(props) {
-  const [collapseOpen, setcollapseOpen] = React.useState(false);
-  const [modalSearch, setmodalSearch] = React.useState(false);
-  const [color, setcolor] = React.useState("navbar-transparent");
+const RTLNavbar = (props) => {
+  const [collapseOpen, setCollapseOpen] = React.useState(false);
+  const [modalSearch, setModalSearch] = React.useState(false);
+  const [color, setColor] = React.useState("navbar-transparent");
   React.useEffect(() => {
     window.addEventListener("resize", updateColor);
-    // Specify how to clean up after this effect:
     return function cleanup() {
       window.removeEventListener("resize", updateColor);
     };
@@ -53,53 +50,95 @@ function AdminNavbar(props) {
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
   const updateColor = () => {
     if (window.innerWidth < 993 && collapseOpen) {
-      setcolor("bg-white");
+      setColor("bg-white");
     } else {
-      setcolor("navbar-transparent");
+      setColor("navbar-transparent");
     }
   };
   // this function opens and closes the collapse on small devices
   const toggleCollapse = () => {
     if (collapseOpen) {
-      setcolor("navbar-transparent");
+      setColor("navbar-transparent");
     } else {
-      setcolor("bg-white");
+      setColor("bg-white");
     }
-    setcollapseOpen(!collapseOpen);
+    setCollapseOpen(!collapseOpen);
   };
   // this function is to open the Search modal
   const toggleModalSearch = () => {
-    setmodalSearch(!modalSearch);
+    setModalSearch(!modalSearch);
   };
   return (
     <>
-      <Navbar className={classNames("navbar-absolute", color)} expand="lg">
+      <Navbar
+        className={classNames("navbar-absolute", {
+          [color]: !document.body.classList.contains("full-screen-map"),
+        })}
+        expand="lg"
+        style={{ top: 0 }}
+      >
         <Container fluid>
           <div className="navbar-wrapper">
+            <div className="navbar-minimize d-inline">
+              <Button
+                className="minimize-sidebar btn-just-icon"
+                color="link"
+                id="tooltip209599"
+                onClick={props.handleMiniClick}
+              >
+                <i className="tim-icons icon-align-center visible-on-sidebar-regular" />
+                <i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini" />
+              </Button>
+              <UncontrolledTooltip
+                delay={0}
+                target="tooltip209599"
+                placement="right"
+              >
+                Sidebar toggle
+              </UncontrolledTooltip>
+            </div>
             <div
               className={classNames("navbar-toggle d-inline", {
                 toggled: props.sidebarOpened,
               })}
             >
-              <NavbarToggler type="button" onClick={props.toggleSidebar}>
+              <button
+                className="navbar-toggler"
+                type="button"
+                onClick={props.toggleSidebar}
+              >
                 <span className="navbar-toggler-bar bar1" />
                 <span className="navbar-toggler-bar bar2" />
                 <span className="navbar-toggler-bar bar3" />
-              </NavbarToggler>
+              </button>
             </div>
             <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
               {props.brandText}
             </NavbarBrand>
           </div>
-          <NavbarToggler onClick={toggleCollapse}>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navigation"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            onClick={toggleCollapse}
+          >
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
-          </NavbarToggler>
+          </button>
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="mr-auto" navbar>
-              <InputGroup className="search-bar">
-                <Button color="link" onClick={toggleModalSearch}>
+              <InputGroup className="search-bar" tag="li">
+                <Button
+                  color="link"
+                  data-target="#searchModal"
+                  data-toggle="modal"
+                  id="search-button"
+                  onClick={toggleModalSearch}
+                >
                   <i className="tim-icons icon-zoom-split" />
                   <span className="d-lg-none d-md-block">Search</span>
                 </Button>
@@ -115,7 +154,7 @@ function AdminNavbar(props) {
                   <i className="tim-icons icon-sound-wave" />
                   <p className="d-lg-none">Notifications</p>
                 </DropdownToggle>
-                <DropdownMenu className="dropdown-navbar" tag="ul" right>
+                <DropdownMenu className="dropdown-navbar" right tag="ul">
                   <NavLink tag="li">
                     <DropdownItem className="nav-item">
                       Mike John responded to your email
@@ -147,19 +186,20 @@ function AdminNavbar(props) {
                 <DropdownToggle
                   caret
                   color="default"
+                  data-toggle="dropdown"
                   nav
                   onClick={(e) => e.preventDefault()}
                 >
                   <div className="photo">
                     <img
                       alt="..."
-                      src={require("assets/img/anime3.png").default}
+                      src={require("assets/img/mike.jpg").default}
                     />
                   </div>
                   <b className="caret d-none d-lg-block d-xl-block" />
                   <p className="d-lg-none">Log out</p>
                 </DropdownToggle>
-                <DropdownMenu className="dropdown-navbar" tag="ul">
+                <DropdownMenu className="dropdown-navbar" right tag="ul">
                   <NavLink tag="li">
                     <DropdownItem className="nav-item">Profile</DropdownItem>
                   </NavLink>
@@ -182,19 +222,21 @@ function AdminNavbar(props) {
         isOpen={modalSearch}
         toggle={toggleModalSearch}
       >
-        <ModalHeader>
-          <Input placeholder="SEARCH" type="text" />
+        <div className="modal-header">
+          <Input id="inlineFormInputGroup" placeholder="SEARCH" type="text" />
           <button
             aria-label="Close"
             className="close"
+            data-dismiss="modal"
+            type="button"
             onClick={toggleModalSearch}
           >
             <i className="tim-icons icon-simple-remove" />
           </button>
-        </ModalHeader>
+        </div>
       </Modal>
     </>
   );
-}
+};
 
-export default AdminNavbar;
+export default RTLNavbar;

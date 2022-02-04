@@ -2,12 +2,11 @@
 /*!
 
 =========================================================
-* Black Dashboard React v1.2.0
+* Black Dashboard PRO React - v1.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
+* Product Page: https://www.creative-tim.com/product/black-dashboard-pro-react
 * Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
 
 * Coded by Creative Tim
 
@@ -16,6 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -47,11 +47,83 @@
     <link href="../src/assets/css/nucleo-icons.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link
-      href="../src/assets/css/black-dashboard-react.css?v=1.2.0"
+      href="../src/assets/css/black-dashboard-pro-react.min.css?v=1.2.0"
       rel="stylesheet"
     />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../src/assets/demo/demo.css" rel="stylesheet" />
+    <style>
+      .offline-doc .page-header {
+        min-height: 100vh;
+        max-height: 999px;
+        padding: 0;
+        color: #ffffff;
+        position: relative;
+      }
+      .offline-doc .page-header .page-header-image {
+        position: absolute;
+        background-size: cover;
+        background-position: center center;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      .offline-doc .page-header .content-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        -ms-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #ffffff;
+        padding: 0 15px;
+        width: 100%;
+        max-width: 880px;
+      }
+      .offline-doc .page-header footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+      .offline-doc .page-header .container {
+        height: 100%;
+        z-index: 1;
+      }
+      .offline-doc .page-header .category,
+      .offline-doc .page-header .description {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .offline-doc .page-header.page-header-small {
+        min-height: 60vh;
+        max-height: 440px;
+      }
+      .offline-doc .page-header.page-header-mini {
+        min-height: 40vh;
+        max-height: 340px;
+      }
+      .offline-doc .page-header .title {
+        margin-bottom: 15px;
+      }
+      .offline-doc .page-header .title + h4 {
+        margin-top: 10px;
+      }
+      .offline-doc .page-header:after,
+      .offline-doc .page-header:before {
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        left: 0;
+        top: 0;
+        content: "";
+      }
+      .offline-doc .page-header:before {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+    </style>
   </head>
 
   <body class="offline-doc">
@@ -67,7 +139,7 @@
             </button>
           </div>
           <a class="navbar-brand" href="javascript:void(0)"
-            >Black Dashboard React</a
+            >Black Dashboard PRO React</a
           >
         </div>
         <button
@@ -87,7 +159,7 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="https://github.com/creativetimofficial/black-dashboard-react/issues"
+                href="https://github.com/creativetimofficial/ct-black-dashboard-pro-react/issues"
                 target="_blank"
               >
                 Have an issue?
@@ -135,13 +207,11 @@
       <div class="content-center">
         <div class="col-md-8 ml-auto mr-auto">
           <div class="brand">
-            <h1 class="title">
-              Black Dashboard React
-            </h1>
+            <h1 class="title">Black Dashboard PRO React</h1>
             <h3 class="description">Documentation v1.2.0</h3>
             <br />
             <a
-              href="https://demos.creative-tim.com/black-dashboard-react/#/documentation/tutorial"
+              href="https://demos.creative-tim.com/black-dashboard-pro-react/#/documentation/tutorial"
               class="btn btn-primary btn-round btn-lg"
               >View documentation</a
             >
@@ -153,19 +223,13 @@
       <div class="container">
         <ul class="nav">
           <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">
-              Creative Tim
-            </a>
+            <a href="javascript:void(0)" class="nav-link"> Creative Tim </a>
           </li>
           <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">
-              About Us
-            </a>
+            <a href="javascript:void(0)" class="nav-link"> About Us </a>
           </li>
           <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">
-              Blog
-            </a>
+            <a href="javascript:void(0)" class="nav-link"> Blog </a>
           </li>
         </ul>
         <div class="copyright">

@@ -1,0 +1,5 @@
+{
+  "AppSyncApiName": "p11ng",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false
+}
