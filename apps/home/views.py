@@ -9,23 +9,24 @@ from django.db.models import fields
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from django.urls import reverse
-from .models import  Accident, Maintenance, Revenue
+from .models import  Accident, Maintenance, Revenue, Car
 from django.core import serializers
 from django.shortcuts import redirect
 
 
 @login_required(login_url="/login/")
 def index(request):
-    events = [] # Maintenance.objects.all() + Accident.objects.all()
+    events = Car.objects.all() # Maintenance.objects.all() + Accident.objects.all()
+    '''
     for accident in Accident.objects.all():
         events.append(accident)
     for maintenace in Maintenance.objects.all():
         events.append(maintenace)
     for revenue in Revenue.objects.all():
         events.append(revenue)
-    context = {'segment': 'index', 'events':events}
-    # print(cars)
-    # content = {cars:cars}
+    '''
+    context = {'segment': 'index', 'events': events}
+    
     
     
     if request.user.is_superuser:

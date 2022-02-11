@@ -34,7 +34,7 @@
   <div class="col-lg-6 col-md-12">
     <div class="card">
       <div class="card-header ">
-        <h6 class="title d-inline">Tasks</h6>
+        <h6 class="title d-inline">Cars</h6>
       </div>
 
       <div class="card-body" style="">
@@ -43,12 +43,44 @@
             <tbody>
               {% for event in events%}
              
-             {% if event.event_type == 'maintenance' %}
-              <tr>
-                <td>
+                <div class="table-responsive">
+                  <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                      <tr>
+                        <th>
+                          Make
+                        </th>
+                        <th>
+                          Model
+                        </th> 
+                        <th>
+                          Year
+                        </th> 
+                        <th>
+                          Event
+                        </th> 
+                        <th>
+                         Actions
+                        </th>  
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{event.car_brand}}</td>
+                     
+                        <td>{{event.car_model}}</td>
+                      
+                        <td>{{event.car_year}}</td>
+                        <td></td>
+                        <td><a class="btn btn-fill btn-sm btn-primary">action</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                <!--td>
                   
 
-                  <!-- Modal -->
+                  <Modal>
                   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -89,9 +121,8 @@
                   class="btn btn-link" data-original-title="Edit Task">
                     <i class="tim-icons icon-pencil"></i>
                   </button>
-                </td>
+                </td--->
               </tr>
-              {% endif %}
               {% endfor %}
             </tbody>
           </table>
@@ -198,13 +229,13 @@
         label: "Data",
         fill: true,
         // backgroundColor: gradientStroke,
-        borderColor: '#d048b6',
+        borderColor: '#E14ECA',
         borderWidth: 2,
         borderDash: [],
         borderDashOffset: 0.0,
-        pointBackgroundColor: '#d048b6',
+        pointBackgroundColor: '#E14ECA',
         pointBorderColor: 'rgba(255,255,255,0)',
-        pointHoverBackgroundColor: '#d048b6',
+        pointHoverBackgroundColor: '#E14ECA',
         pointBorderWidth: 20,
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
@@ -234,7 +265,7 @@
         datasets: [{
           label: "earnings",
           fill: true,
-          backgroundColor: '#9D4763',
+          backgroundColor: '#E14ECA',
           //hoverBackgroundColor: gradientStroke,
           // borderColor: '#1f8ef1',
           borderWidth: 2,

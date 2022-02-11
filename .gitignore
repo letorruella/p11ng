@@ -15,6 +15,9 @@ __pycache__/
 env
 venv
 
+# Variables
+.env
+
 # other
 .DS_Store
 
@@ -30,3 +33,25 @@ apps/static/assets/yarn.lock
 apps/static/assets/.temp
 
 cars/
+
+data = {
+  "personalizations": [
+    {
+      "to": [
+        {
+          "email": "luis@adobo.agency"
+        }
+      ],
+      "subject": "Sending with SendGrid is Fun"
+    }
+  ],
+  "from": {
+    "email": "test@p11ng.com"
+  },
+  "content": [
+    {
+      "type": "text/plain",
+      "value": "and easy to do anywhere, even with Python"
+    }
+  ]
+}

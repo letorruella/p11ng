@@ -12,6 +12,7 @@ from django.db.models.base import Model
 class Car(models.Model):
     car_brand = models.CharField(max_length=150, help_text='Car Brand')
     car_model = models.CharField(max_length=150, help_text='Car Model')
+    car_year = models.IntegerField(null=True, help_text='Car year')
     investor = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
